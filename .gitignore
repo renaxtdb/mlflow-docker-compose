@@ -167,3 +167,4 @@ Thumbs.db
 
 /db/
 !.gitkeep
+!/artifacts/.gitkeep
