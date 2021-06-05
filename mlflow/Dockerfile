@@ -5,7 +5,7 @@ FROM python:${TAG}
 
 LABEL maintainer="renaxtdb1@gmail.com"
 LABEL version="1.0"
-LABEL description="Run mlflow image"
+LABEL description="mlflow server image"
 
 RUN mkdir -p /mlflow/mlruns
 
