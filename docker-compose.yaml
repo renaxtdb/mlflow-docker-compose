@@ -2,6 +2,7 @@ version: '3'
 services:
   postgresql:
     image: postgres:10.5
+    user: postgres
     container_name: postgresql
     volumes:
       - ./db/postgres:/var/lib/postgresql/data
