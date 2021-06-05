@@ -3,9 +3,9 @@ ARG DEBIAN_VERSION
 ARG TAG=${PYTHON_VERSION}-${DEBIAN_VERSION}
 FROM python:${TAG} AS production
 
-LABEL maintainer="yu_adachi@albert2005.co.jp"
+LABEL maintainer="renaxtdb1@gmail.com"
 LABEL version="1.0"
-LABEL description="sshとjupyterを実行可能なdocker image。付属のdocerk-composeと合わせることを推奨。"
+LABEL description="no conda jupyter image"
 
 
 RUN mkdir -p /usr/share/man/man1
@@ -34,4 +34,5 @@ RUN poetry run jupyter serverextension enable --py jupyterlab_code_formatter\
         @jupyterlab/toc
 COPY jupyter/settings.jupyterlab-settings /root/.jupyter/lab/user-settings/@ryantam626/jupyterlab_code_formatter/settings.jupyterlab-settings
 
-# WORKDIR /home/jovyan/work
+USER jupyter
+WORKDIR /home/jovyan/work/
