@@ -15,6 +15,11 @@ services:
       POSTGRES_INITDB_ARGS: "--encoding=UTF-8"
       PGDATA: /var/lib/postgresql/data/pgdata
     hostname: postgresql
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER} -d ${POSTGRES_DB_NAME}"]
+      interval: 15s
+      timeout: 5s
+      retries: 10
     restart: always
     networks:
       - nginx_network
@@ -37,7 +42,8 @@ services:
     ports:
       - 5000:5000
     depends_on:
-      - postgresql
+      postgresql:
+        condition: service_healthy
     command: bash -c "mlflow server --backend-store-uri ${DB_URL} --default-artifact-root ${ARTIFACT_PATH} --host 0.0.0.0 --port 5000"
     networks:
       - nginx_network
@@ -73,7 +79,7 @@ services:
       - postgresql
       - mlflow
     command: bash -c "
-      poetry run jupyter lab
+      jupyter lab
         --ip=0.0.0.0
         --port=${JUPYTER_PORT_NO}
         --allow-root
