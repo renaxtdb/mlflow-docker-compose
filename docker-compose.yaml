@@ -56,7 +56,7 @@ services:
       args:
         - PYTHON_VERSION=${PYTHON_VERSION}
         - DEBIAN_VERSION=${DEBIAN_VERSION}
-    image: albert/jupyter-mlflow:${PYTHON_VERSION}
+    image: myproject/jupyter-mlflow:${PYTHON_VERSION}
     container_name: ${USER_NAME}-mlflow-jupyter-container
     ###############################################
     # リソースコントロール
